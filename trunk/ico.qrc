@@ -1,0 +1,22 @@
+<RCC>
+    <qresource prefix="/">
+        <file>ui.qml</file>
+        <file>image/like.png</file>
+        <file>image/next.png</file>
+        <file>image/pause.png</file>
+        <file>image/play.png</file>
+        <file>image/x.png</file>
+        <file>image/min.png</file>
+        <file>image/dislike.png</file>
+        <file>image/trash.png</file>
+        <file>image/doubanmusic.png</file>
+        <file>douban.ico</file>
+        <file>image/eject.png</file>
+        <file>image/big.png</file>
+        <file>image/small.png</file>
+        <file>ProgressBar.qml</file>
+        <file>Channellist.qml</file>
+        <file>image/rss_32x32.png</file>
+        <file>image/down.png</file>
+    </qresource>
+</RCC>
