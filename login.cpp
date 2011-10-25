@@ -130,7 +130,8 @@ void Login::extraNetworkFinished(QNetworkReply* reply)
         fmCookies = qvariant_cast<QList<QNetworkCookie> >(list);
         setCookie(fmCookies);
 
-        if (all=="Your browser should have redirected you to http://www.douban.com/")
+//        qDebug()<<all;
+        if (all=="Your browser should have redirected you to http://www.douban.com")
             emit succ("µÇÂ¼³É¹¦");
         else
             emit succ("µÇÂ¼Ê§°Ü");
