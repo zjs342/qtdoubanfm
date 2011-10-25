@@ -164,6 +164,7 @@ void Widget::loadIni()
     if (m_cType=="" || m_cType=="db")
     {
         fmurl.setUrl("http://douban.fm/j/mine/playlist?type=n&h=&channel=0");
+        m_cType="public";
     }
     settings.beginGroup("LRC");
     setfdesktop(settings.value("lrc").toBool());
@@ -193,11 +194,17 @@ void Widget::netInit()
     connect(listManager,SIGNAL(finished(QNetworkReply*)),this,SLOT(downloadList(QNetworkReply*)));
     //   listManager->cookieJar()->setCookiesFromUrl(this->loginwidget->m_cookies,QUrl(fmurl));
     //    qDebug()<<this->loginwidget->m_cookies;
+    //qDebug()<<fmurl;
     listManager->get(QNetworkRequest(QUrl(fmurl))); //发送请求
 }
 
 void Widget::songInit(QString json)
 {
+    qDebug()<<json;
+    QString head="403 Forbidden";
+    int h = json.indexOf(head);
+    qDebug()<<h;
+    if (h!=-1) {showMessage("网络问题"); return;}
     QScriptValue sc;
     QScriptEngine engine;
     sc = engine.evaluate("value = " + json);//注意这里必须这么用。不知道为什么。没有去研究。
@@ -227,7 +234,7 @@ void Widget::uiInit()
 
 void Widget::downloadList(QNetworkReply *reply)  //当回复结束后
 {
-    // qDebug()<<"downloadList";
+   // qDebug()<<"downloadList";
     QTextCodec *codec = QTextCodec::codecForName("utf8");
     QString json= codec->toUnicode(reply->readAll());
     songInit(json);
@@ -239,6 +246,7 @@ void Widget::downloadList(QNetworkReply *reply)  //当回复结束后
 void Widget::addFiles()
 {
     //qDebug()<<"addFiles"<<dbfmNum;
+    if (dbfmNum==0) return;
     int i;
     int index = sources.size();
     for (i=0;i<dbfmNum;i++)
@@ -335,7 +343,7 @@ void Widget::sourceChanged(const Phonon::MediaSource &source)
 
 void Widget::onSongStatus()
 {
-    // qDebug()<<"onSongStatus";
+    //qDebug()<<"onSongStatus";
     QString sid = nowPlaySong.sid;
     if (sid=="") return;
     QString subtype = nowPlaySong.subtype;
@@ -422,6 +430,7 @@ void Widget::requireList(char type)
     //    if(e_lastChannel != -1)
     //        url.append(QString("&last_channel=%1").arg((int)e_lastChannel));
 
+    //qDebug()<<m_cType;
     if (m_cType=="public"  || m_cType=="db") url.append(QString("&channel=%1").arg((int)e_channel));
     if (m_cType=="dj")
     {
@@ -442,7 +451,7 @@ void Widget::requireList(char type)
         url.append(QString("&channel=dj&pid=%1").arg((int)e_channel));
     }
     url.append(QString("&r=%1").arg(r));
-    //    qDebug()<<url;
+      //  qDebug()<<url;
     /*    url.append("&rest=");
     QString rest;
     if(m_playList.length())
@@ -518,7 +527,10 @@ void Widget::tick(qint64 time)
 {
     QTime displayTime(0, (time / 60000) % 60, (time / 1000) % 60);
     setttime(displayTime.toString("mm:ss")+"/"+m_ttick);
-    setpb((int)time*1000/tttime);
+    if (tttime!=0)
+        setpb((int)time*1000/tttime);
+    else
+        tttime=mediaObject->totalTime();
     // qDebug()<<(int)time*100/tttime;
     //ui->mygroupBox->ui->lcdNumber->display(displayTime.toString("mm:ss"));
     int t=(int)time;
@@ -641,8 +653,8 @@ void Widget::showMessage(const QString &s)
 void Widget::messageAbout()
 {
     QMessageBox::about(this,("豆瓣电台"),("<h2>By Spring</h2>"
-                                      "<p>2011年07月21日"
-                                      "<p>Spring的豆瓣电台3.21 beta"
+                                      "<p>2011年10月12日"
+                                      "<p>Spring的豆瓣电台3.22 beta"
                                       "<p>125392171@163.com"));
 }
 
@@ -689,6 +701,7 @@ void Widget::quitIt()
 
 void Widget::channelInit()
 {
+    if (dbfmNum==0) return;
     QNetworkAccessManager* channeltManager = new QNetworkAccessManager(this);  //新建QNetworkAccessManager对象
     connect(channeltManager,SIGNAL(finished(QNetworkReply*)),this,SLOT(downloadChannel(QNetworkReply*)));
     //    Listmanager->cookieJar()->setCookiesFromUrl(this->loginwidget->m_cookies,QUrl(fmurl));
