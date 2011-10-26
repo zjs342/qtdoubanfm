@@ -63,7 +63,7 @@ Rectangle {
             onClicked: widget.openIt()
             //            onPressed: widget.mystate(2,3)
             //          onReleased: widget.mystate(2,1)
-            onEntered: parent.opacity = 0.5
+            onEntered: parent.opacity = 0.8
             onExited:  parent.opacity = 1
         }
 
@@ -1172,3 +1172,4 @@ Rectangle {
     }
 
 }
+

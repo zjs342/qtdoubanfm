@@ -192,7 +192,7 @@ void Widget::netInit()
     //    qDebug()<<"netinit";
     QNetworkAccessManager* listManager = new QNetworkAccessManager(this);  //新建QNetworkAccessManager对象
     connect(listManager,SIGNAL(finished(QNetworkReply*)),this,SLOT(downloadList(QNetworkReply*)));
-    //   listManager->cookieJar()->setCookiesFromUrl(this->loginwidget->m_cookies,QUrl(fmurl));
+    listManager->cookieJar()->setCookiesFromUrl(this->loginwidget->m_cookies,QUrl(fmurl));
     //    qDebug()<<this->loginwidget->m_cookies;
     //qDebug()<<fmurl;
     listManager->get(QNetworkRequest(QUrl(fmurl))); //发送请求
@@ -200,10 +200,10 @@ void Widget::netInit()
 
 void Widget::songInit(QString json)
 {
-    qDebug()<<json;
+    //qDebug()<<json;
     QString head="403 Forbidden";
     int h = json.indexOf(head);
-    qDebug()<<h;
+    //qDebug()<<h;
     if (h!=-1) {showMessage("网络问题"); return;}
     QScriptValue sc;
     QScriptEngine engine;
@@ -653,8 +653,8 @@ void Widget::showMessage(const QString &s)
 void Widget::messageAbout()
 {
     QMessageBox::about(this,("豆瓣电台"),("<h2>By Spring</h2>"
-                                      "<p>2011年10月12日"
-                                      "<p>Spring的豆瓣电台3.22 beta"
+                                      "<p>2011年10月26日"
+                                      "<p>Spring的豆瓣电台3.23 beta"
                                       "<p>125392171@163.com"));
 }
 
@@ -701,17 +701,18 @@ void Widget::quitIt()
 
 void Widget::channelInit()
 {
-    if (dbfmNum==0) return;
+   // qDebug()<<"channelInit"<<dbfmNum;
+   // if (dbfmNum==0) return;
     QNetworkAccessManager* channeltManager = new QNetworkAccessManager(this);  //新建QNetworkAccessManager对象
     connect(channeltManager,SIGNAL(finished(QNetworkReply*)),this,SLOT(downloadChannel(QNetworkReply*)));
-    //    Listmanager->cookieJar()->setCookiesFromUrl(this->loginwidget->m_cookies,QUrl(fmurl));
+    channeltManager->cookieJar()->setCookiesFromUrl(this->loginwidget->m_cookies,QUrl(fmurl));
     //    qDebug()<<this->loginwidget->m_cookies;
     channeltManager->get(QNetworkRequest(QUrl("http://douban.fm"))); //发送请求
 }
 
 void Widget::downloadChannel(QNetworkReply *reply)  //当回复结束后
 {
-    // qDebug()<<"downloadList";
+    //qDebug()<<"downloadList";
     QTextCodec *codec = QTextCodec::codecForName("utf8");
     QString all= codec->toUnicode(reply->readAll());
 
@@ -941,6 +942,7 @@ void Widget::search(QString str)
     //connect(Smanager,SIGNAL(finished(QNetworkReply*)),this,SLOT(searchfinish(QNetworkReply*)));
 
     connect(Smanager,SIGNAL(finished(QNetworkReply*)),this,SLOT(searchfinish2(QNetworkReply*)));
+    //Smanager->cookieJar()->setCookiesFromUrl(this->loginwidget->m_cookies,QUrl(urlEn));
     Smanager->get(QNetworkRequest(urlEn));
 }
 
@@ -949,29 +951,31 @@ void Widget::searchfinish2(QNetworkReply *reply)
     QTextCodec *codec = QTextCodec::codecForName("utf-8");
     QString all = codec->toUnicode(reply->readAll());
     //QString all=reply->readAll();
-    //qDebug()<<all;
+    qDebug()<<all;
     QString head="http://music.douban.com/musician/";
     QString head2="去FM收听";
     QString head3="onclick";
     QString head4="title";
-    QString teil2=">";
+    QString teil2="onclick";
     QString teil4=">";
     QString lrc,showList;
-    int h,h2,h3,h4,t,t3,t4;
+    int h,h2,h3,h4,t,t4;
     h = all.indexOf(head);
     h2 = all.indexOf(head2);
+    //qDebug()<<h2;
     if (h2<0)
     {
         showMessage("没找着...");
         return;
     }
     channeldbNum = 0;
-    if (h2-h<600)
+    //qDebug()<<h2-h;
+     if (h2-h<900)
     {
         lrc = all.mid(h+33,6);
         showList=all.mid(h+49);
         t = showList.indexOf(teil2);
-        showList = showList.mid(0,t-1);
+        showList = showList.mid(0,t-2);
         //qDebug()<<showList<<lrc;
         QString dburl = QString("http://douban.fm/j/mine/playlist?context=channel:0|musician_id:%1&sid=&channel=0&type=n&h=").arg(lrc);
         all = all.mid(h2+1);
@@ -980,7 +984,6 @@ void Widget::searchfinish2(QNetworkReply *reply)
         channeldbNum++;
     }
     h2 = all.indexOf(head2);
-
     while (h2!=-1)
     {
         all = all.mid(h2-500);
@@ -1065,4 +1068,5 @@ void Widget::lastFile(int i)
     qDebug()<<" "<<index<<totlenum;
     */
 }
+
 
