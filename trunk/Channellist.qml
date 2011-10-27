@@ -1,6 +1,6 @@
 import QtQuick 1.0
 
-ListModel{  //数据模型
+ListModel{  //鏁版嵁妯″瀷
     id:listModel
     ListElement{name:"Tom";number:"001"}
     ListElement{name:"John";number:"002"}

@@ -11,7 +11,7 @@ Widget::Widget(QDeclarativeView *parent)
         QDir dirsong;
         dirsong.mkdir("./song");
     }
-    settitle("¶¹°êµçÌ¨");
+    settitle("è±†ç“£ç”µå°");
     setalbum("");
     setartist("Spring");
     setpic(":image/doubanmusic.png");
@@ -22,7 +22,7 @@ Widget::Widget(QDeclarativeView *parent)
     uiInit();
     loadIni();
     createTrayIcon();
-    showMessage("»¶Ó­Ê¹ÓÃ");
+    showMessage("æ¬¢è¿ä½¿ç”¨");
     phononInit();
     totlenum=0;dbfmNum=0;e_channel=0;listNum=0;
     type='e';
@@ -44,35 +44,35 @@ void Widget::createTrayIcon()
 {
     trayIcon = new QSystemTrayIcon(this);
 
-    quitAction = new QAction(("ÍË³ö"), this);
+    quitAction = new QAction(("é€€å‡º"), this);
     connect(quitAction, SIGNAL(triggered()), qApp, SLOT(quit()));
 
-    myabout = new QAction(("¹ØÓÚ"),this);
+    myabout = new QAction(("å…³äº"),this);
     connect(myabout,SIGNAL(triggered()),this,SLOT(messageAbout()));
 
-    mylogin = new QAction(("µÇÂ¼"),this);
+    mylogin = new QAction(("ç™»å½•"),this);
     connect(mylogin,SIGNAL(triggered()),this,SLOT(logindb()));
 
-    myproxy = new QAction(("´úÀí"),this);
+    myproxy = new QAction(("ä»£ç†"),this);
     connect(myproxy,SIGNAL(triggered()),proxywidget,SLOT(show()));
 
-    myshortcut = new QAction(("¿ì½İ¼ü"),this);
+    myshortcut = new QAction(("å¿«æ·é”®"),this);
     connect(myshortcut,SIGNAL(triggered()),shortcutwidget,SLOT(mshow()));
 
-    mylikeit = new QAction(("ÎÒÏ²»¶"),this);
+    mylikeit = new QAction(("æˆ‘å–œæ¬¢"),this);
     mylikeit->setIcon(QIcon(":image/like.png"));
     connect(mylikeit,SIGNAL(triggered()),this,SLOT(likeItit()));
 
-    mytrashit = new QAction(("²»ÔÙ²¥·Å"),this);
+    mytrashit = new QAction(("ä¸å†æ’­æ”¾"),this);
     mytrashit->setIcon(QIcon(":image/trash.png"));
     connect(mytrashit,SIGNAL(triggered()),this,SLOT(trashIt()));
 
-    mynextfile = new QAction(("ÏÂÒ»Ê×"),this);
+    mynextfile = new QAction(("ä¸‹ä¸€é¦–"),this);
     mynextfile->setIcon(QIcon(":image/next.png"));
     connect(mynextfile,SIGNAL(triggered()),this,SLOT(nextFile()));
     trayIcon->setIcon(QIcon(":douban.ico"));
     trayIcon->show();
-    trayIcon->setToolTip(("¶¹°êµçÌ¨"));
+    trayIcon->setToolTip(("è±†ç“£ç”µå°"));
 }
 
 void Widget::trayIconmenu()
@@ -120,7 +120,7 @@ void Widget::trayIconmenu()
 
 void Widget::iconActivated(QSystemTrayIcon::ActivationReason reason)
 {
-    //´¥·¢ºóÌ¨Í¼±êÖ´ĞĞÏàÓ¦ÊÂ¼ş
+    //è§¦å‘åå°å›¾æ ‡æ‰§è¡Œç›¸åº”äº‹ä»¶
     switch (reason)
     {
     case QSystemTrayIcon::Trigger:
@@ -135,10 +135,10 @@ void Widget::iconActivated(QSystemTrayIcon::ActivationReason reason)
             this->hide();
         break;
     case QSystemTrayIcon::DoubleClick:
-        //        showMessage("Êó±êË«»÷£¡");
+        //        showMessage("é¼ æ ‡åŒå‡»ï¼");
         break;
     case QSystemTrayIcon::MiddleClick:
-        //        showMessage("Êó±êÖĞ¼ü£¡");
+        //        showMessage("é¼ æ ‡ä¸­é”®ï¼");
         break;
     default:
         break;
@@ -190,12 +190,12 @@ void Widget::phononInit()
 void Widget::netInit()
 {
     //    qDebug()<<"netinit";
-    QNetworkAccessManager* listManager = new QNetworkAccessManager(this);  //ĞÂ½¨QNetworkAccessManager¶ÔÏó
+    QNetworkAccessManager* listManager = new QNetworkAccessManager(this);  //æ–°å»ºQNetworkAccessManagerå¯¹è±¡
     connect(listManager,SIGNAL(finished(QNetworkReply*)),this,SLOT(downloadList(QNetworkReply*)));
     listManager->cookieJar()->setCookiesFromUrl(this->loginwidget->m_cookies,QUrl(fmurl));
     //    qDebug()<<this->loginwidget->m_cookies;
     //qDebug()<<fmurl;
-    listManager->get(QNetworkRequest(QUrl(fmurl))); //·¢ËÍÇëÇó
+    listManager->get(QNetworkRequest(QUrl(fmurl))); //å‘é€è¯·æ±‚
 }
 
 void Widget::songInit(QString json)
@@ -204,10 +204,10 @@ void Widget::songInit(QString json)
     QString head="403 Forbidden";
     int h = json.indexOf(head);
     //qDebug()<<h;
-    if (h!=-1) {showMessage("ÍøÂçÎÊÌâ"); return;}
+    if (h!=-1) {showMessage("ç½‘ç»œé—®é¢˜"); return;}
     QScriptValue sc;
     QScriptEngine engine;
-    sc = engine.evaluate("value = " + json);//×¢ÒâÕâÀï±ØĞëÕâÃ´ÓÃ¡£²»ÖªµÀÎªÊ²Ã´¡£Ã»ÓĞÈ¥ÑĞ¾¿¡£
+    sc = engine.evaluate("value = " + json);//æ³¨æ„è¿™é‡Œå¿…é¡»è¿™ä¹ˆç”¨ã€‚ä¸çŸ¥é“ä¸ºä»€ä¹ˆã€‚æ²¡æœ‰å»ç ”ç©¶ã€‚
     int i=0;
 
     if (sc.property("song").isArray())
@@ -232,14 +232,14 @@ void Widget::uiInit()
     connect(this->loginwidget,SIGNAL(succ(const QString&)),this,SLOT(showMessage(const QString&)));
 }
 
-void Widget::downloadList(QNetworkReply *reply)  //µ±»Ø¸´½áÊøºó
+void Widget::downloadList(QNetworkReply *reply)  //å½“å›å¤ç»“æŸå
 {
    // qDebug()<<"downloadList";
     QTextCodec *codec = QTextCodec::codecForName("utf8");
     QString json= codec->toUnicode(reply->readAll());
     songInit(json);
     addFiles();
-    reply->deleteLater();   //×îºóÒªÊÍ·Åreply¶ÔÏó
+    reply->deleteLater();   //æœ€åè¦é‡Šæ”¾replyå¯¹è±¡
 }
 
 
@@ -364,11 +364,11 @@ void Widget::onSongStatus()
             m_historyTypes.removeFirst();
         }
     }
-    // type == 'e' ³É¹¦²¥·ÅÍê±Ï
-    // type == 'r' Ï²»¶±ê¼Ç
-    // type == 'u' È¡ÏûÏ²»¶±ê¼Ç
-    // type == 's' Ìø¹ı±ê¼Ç
-    // type == 'b' É¾³ı±ê¼Ç
+    // type == 'e' æˆåŠŸæ’­æ”¾å®Œæ¯•
+    // type == 'r' å–œæ¬¢æ ‡è®°
+    // type == 'u' å–æ¶ˆå–œæ¬¢æ ‡è®°
+    // type == 's' è·³è¿‡æ ‡è®°
+    // type == 'b' åˆ é™¤æ ‡è®°
     // qDebug()<<type;
     if( type == 'e')
         reportPlayed();
@@ -467,7 +467,7 @@ void Widget::requireList(char type)
     QNetworkRequest request;
     request.setUrl(url);
 
-    // ²»·ÖÎöÏ²»¶/²»Ï²»¶/É¾³ı·µ»ØµÄÁĞ±í
+    // ä¸åˆ†æå–œæ¬¢/ä¸å–œæ¬¢/åˆ é™¤è¿”å›çš„åˆ—è¡¨
     /*    if(type != 'u' && type != 'r' && type != 'b')
     {
         if(m_getListReply)
@@ -647,14 +647,14 @@ void Widget::playPause()
 
 void Widget::showMessage(const QString &s)
 {
-    trayIcon->showMessage(("¶¹°êµçÌ¨"),s);
+    trayIcon->showMessage(("è±†ç“£ç”µå°"),s);
 }
 
 void Widget::messageAbout()
 {
-    QMessageBox::about(this,("¶¹°êµçÌ¨"),("<h2>By Spring</h2>"
-                                      "<p>2011Äê10ÔÂ26ÈÕ"
-                                      "<p>SpringµÄ¶¹°êµçÌ¨3.23 beta"
+    QMessageBox::about(this,("è±†ç“£ç”µå°"),("<h2>By Spring</h2>"
+                                      "<p>2011å¹´10æœˆ26æ—¥"
+                                      "<p>Springçš„è±†ç“£ç”µå°3.23 beta"
                                       "<p>125392171@163.com"));
 }
 
@@ -703,14 +703,14 @@ void Widget::channelInit()
 {
    // qDebug()<<"channelInit"<<dbfmNum;
    // if (dbfmNum==0) return;
-    QNetworkAccessManager* channeltManager = new QNetworkAccessManager(this);  //ĞÂ½¨QNetworkAccessManager¶ÔÏó
+    QNetworkAccessManager* channeltManager = new QNetworkAccessManager(this);  //æ–°å»ºQNetworkAccessManagerå¯¹è±¡
     connect(channeltManager,SIGNAL(finished(QNetworkReply*)),this,SLOT(downloadChannel(QNetworkReply*)));
     channeltManager->cookieJar()->setCookiesFromUrl(this->loginwidget->m_cookies,QUrl(fmurl));
     //    qDebug()<<this->loginwidget->m_cookies;
-    channeltManager->get(QNetworkRequest(QUrl("http://douban.fm"))); //·¢ËÍÇëÇó
+    channeltManager->get(QNetworkRequest(QUrl("http://douban.fm"))); //å‘é€è¯·æ±‚
 }
 
-void Widget::downloadChannel(QNetworkReply *reply)  //µ±»Ø¸´½áÊøºó
+void Widget::downloadChannel(QNetworkReply *reply)  //å½“å›å¤ç»“æŸå
 {
     //qDebug()<<"downloadList";
     QTextCodec *codec = QTextCodec::codecForName("utf8");
@@ -727,7 +727,7 @@ void Widget::downloadChannel(QNetworkReply *reply)  //µ±»Ø¸´½áÊøºó
     //qDebug()<<json;
     QScriptValue sc;
     QScriptEngine engine;
-    sc = engine.evaluate("value = " + json);//×¢ÒâÕâÀï±ØĞëÕâÃ´ÓÃ¡£²»ÖªµÀÎªÊ²Ã´¡£Ã»ÓĞÈ¥ÑĞ¾¿¡£
+    sc = engine.evaluate("value = " + json);//æ³¨æ„è¿™é‡Œå¿…é¡»è¿™ä¹ˆç”¨ã€‚ä¸çŸ¥é“ä¸ºä»€ä¹ˆã€‚æ²¡æœ‰å»ç ”ç©¶ã€‚
     int i=0;
 
     QScriptValueIterator it(sc.property("public"));
@@ -767,7 +767,7 @@ void Widget::downloadChannel(QNetworkReply *reply)  //µ±»Ø¸´½áÊøºó
     //json = "[" + all.mid(h+18,t-h-22) + "]";
     json=all.mid(h+17,t-h-20);
     //qDebug()<<json;
-    sc = engine.evaluate("value = " + json);//×¢ÒâÕâÀï±ØĞëÕâÃ´ÓÃ¡£²»ÖªµÀÎªÊ²Ã´¡£Ã»ÓĞÈ¥ÑĞ¾¿¡£
+    sc = engine.evaluate("value = " + json);//æ³¨æ„è¿™é‡Œå¿…é¡»è¿™ä¹ˆç”¨ã€‚ä¸çŸ¥é“ä¸ºä»€ä¹ˆã€‚æ²¡æœ‰å»ç ”ç©¶ã€‚
     i=0;
     QScriptValueIterator cit(sc);
     while (cit.hasNext())
@@ -791,7 +791,7 @@ void Widget::downloadChannel(QNetworkReply *reply)  //µ±»Ø¸´½áÊøºó
     //json = "[" + all.mid(h+18,t-h-22) + "]";
     json=all.mid(h+17,t-h-20);
     //qDebug()<<json;
-    sc = engine.evaluate("value = " + json);//×¢ÒâÕâÀï±ØĞëÕâÃ´ÓÃ¡£²»ÖªµÀÎªÊ²Ã´¡£Ã»ÓĞÈ¥ÑĞ¾¿¡£
+    sc = engine.evaluate("value = " + json);//æ³¨æ„è¿™é‡Œå¿…é¡»è¿™ä¹ˆç”¨ã€‚ä¸çŸ¥é“ä¸ºä»€ä¹ˆã€‚æ²¡æœ‰å»ç ”ç©¶ã€‚
     for (int j=0;j<i;j++)
     {
         QScriptValueIterator ccit(sc.property(channeldj[j].id));
@@ -809,7 +809,7 @@ void Widget::downloadChannel(QNetworkReply *reply)  //µ±»Ø¸´½áÊøºó
         }
         channeldj[j].num=k;
     }
-    reply->deleteLater();   //×îºóÒªÊÍ·Åreply¶ÔÏó
+    reply->deleteLater();   //æœ€åè¦é‡Šæ”¾replyå¯¹è±¡
 }
 
 void Widget::updateData(QString type,int n)
@@ -865,11 +865,11 @@ void Widget::updateData2(QString type,int a,int n)
     if (type=="db")
     {
         totlenum=totlenum+dbfmNum;
-        QNetworkAccessManager* Listmanager = new QNetworkAccessManager(this);  //ĞÂ½¨QNetworkAccessManager¶ÔÏó
+        QNetworkAccessManager* Listmanager = new QNetworkAccessManager(this);  //æ–°å»ºQNetworkAccessManagerå¯¹è±¡
         connect(Listmanager,SIGNAL(finished(QNetworkReply*)),this,SLOT(downloadList(QNetworkReply*)));
         Listmanager->cookieJar()->setCookiesFromUrl(this->loginwidget->m_cookies,QUrl(channeldb[a].id));
         //qDebug()<<this->loginwidget->m_cookies;
-        Listmanager->get(QNetworkRequest(QUrl(channeldb[a].id))); //·¢ËÍÇëÇó
+        Listmanager->get(QNetworkRequest(QUrl(channeldb[a].id))); //å‘é€è¯·æ±‚
         setmystate2(2);
         return;
     }
@@ -897,10 +897,10 @@ void Widget::changeChannel(QString t, int a)
 void Widget::downloadSong()
 {
     //    qDebug()<<"downloadSong";
-    showMessage(nowPlaySong.title + " " + nowPlaySong.artist + "\nÕıÔÚÏÂÔØ...");
-    QNetworkAccessManager* Songmanager = new QNetworkAccessManager(this);  //ĞÂ½¨QNetworkAccessManager¶ÔÏó
+    showMessage(nowPlaySong.title + " " + nowPlaySong.artist + "\næ­£åœ¨ä¸‹è½½...");
+    QNetworkAccessManager* Songmanager = new QNetworkAccessManager(this);  //æ–°å»ºQNetworkAccessManagerå¯¹è±¡
     connect(Songmanager,SIGNAL(finished(QNetworkReply*)),this,SLOT(downloadSongfinish(QNetworkReply*)));
-    Songmanager->get(QNetworkRequest(QUrl(nowPlaySong.url))); //·¢ËÍÇëÇó
+    Songmanager->get(QNetworkRequest(QUrl(nowPlaySong.url))); //å‘é€è¯·æ±‚
 }
 
 void Widget::downloadSongfinish(QNetworkReply *reply)
@@ -909,10 +909,10 @@ void Widget::downloadSongfinish(QNetworkReply *reply)
     QString filepath;
     filepath = "./song/" + nowPlaySong.title + "-" + nowPlaySong.artist + ".mp3";
     QFile file(filepath);
-    if (!file.open(QIODevice::WriteOnly)) { showMessage("ÏÂÔØÊ§°Ü"); return;}
+    if (!file.open(QIODevice::WriteOnly)) { showMessage("ä¸‹è½½å¤±è´¥"); return;}
     //    qDebug()<<filepath;
     file.write(reply->readAll());
-    showMessage(nowPlaySong.title + " " + nowPlaySong.artist + "\nÏÂÔØÍê³É");
+    showMessage(nowPlaySong.title + " " + nowPlaySong.artist + "\nä¸‹è½½å®Œæˆ");
     file.close();
     reply->deleteLater();
 }
@@ -928,7 +928,7 @@ void Widget::search(QString str)
 {
     //qDebug()<<"search"<<str;
     if (str=="") return;
-    if (str=="µã²¥") return;
+    if (str=="ç‚¹æ’­") return;
     //setmystate2(2);
     //QString url = QString("http://music.douban.com/subject_search?search_text=%1&cat=1003").arg(str);
 
@@ -953,7 +953,7 @@ void Widget::searchfinish2(QNetworkReply *reply)
     //QString all=reply->readAll();
     qDebug()<<all;
     QString head="http://music.douban.com/musician/";
-    QString head2="È¥FMÊÕÌı";
+    QString head2="å»FMæ”¶å¬";
     QString head3="onclick";
     QString head4="title";
     QString teil2="onclick";
@@ -965,7 +965,7 @@ void Widget::searchfinish2(QNetworkReply *reply)
     //qDebug()<<h2;
     if (h2<0)
     {
-        showMessage("Ã»ÕÒ×Å...");
+        showMessage("æ²¡æ‰¾ç€...");
         return;
     }
     channeldbNum = 0;
@@ -1039,16 +1039,16 @@ void Widget::searchfinish(QNetworkReply *reply)
     QUrl url(dburl);
     if (h==-1)
     {
-        showMessage("Ã»ÕÒ×Å...");
+        showMessage("æ²¡æ‰¾ç€...");
         return;
     }
 
     totlenum=totlenum+dbfmNum;
-    QNetworkAccessManager* Listmanager = new QNetworkAccessManager(this);  //ĞÂ½¨QNetworkAccessManager¶ÔÏó
+    QNetworkAccessManager* Listmanager = new QNetworkAccessManager(this);  //æ–°å»ºQNetworkAccessManagerå¯¹è±¡
     connect(Listmanager,SIGNAL(finished(QNetworkReply*)),this,SLOT(downloadList(QNetworkReply*)));
     Listmanager->cookieJar()->setCookiesFromUrl(this->loginwidget->m_cookies,QUrl(url));
     //qDebug()<<this->loginwidget->m_cookies;
-    Listmanager->get(QNetworkRequest(QUrl(url))); //·¢ËÍÇëÇó
+    Listmanager->get(QNetworkRequest(QUrl(url))); //å‘é€è¯·æ±‚
 
     //    qDebug()<<url;
 }

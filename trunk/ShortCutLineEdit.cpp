@@ -16,7 +16,7 @@
 //                m_btn.hide();
 //                m_btn.setCursor( Qt::ArrowCursor );
 //                connect( &m_btn, SIGNAL( clicked() ), this, SLOT( clearText() ) );
-//                setButtonVisible(true,tr("Çå³ı¿ì½İ¼ü"));
+//                setButtonVisible(true,tr("æ¸…é™¤å¿«æ·é”®"));
 
 		ensurePolished();
 //                updateButtonPosition();
@@ -62,7 +62,7 @@
 			s_storedKey = text();
 		}
 
-		// ºóÍË¼üÇå³ı¿ì½İ¼ü
+		// åé€€é”®æ¸…é™¤å¿«æ·é”®
 		if( e->key() == Qt::Key_Backspace )
 		{
 			setText( "" );
@@ -79,7 +79,7 @@
 		setText( keyseq );
 		if( modifiers == 0 || key == 0 )
 		{
-			// Èç¹ûÃ»ÓĞmodifier£¬»òÕßÖ»ÓĞmodifier£¬Õâ¸ö¿ì½İ¼ü²»ÄÜÓÃ¡£
+			// å¦‚æœæ²¡æœ‰modifierï¼Œæˆ–è€…åªæœ‰modifierï¼Œè¿™ä¸ªå¿«æ·é”®ä¸èƒ½ç”¨ã€‚
 			b_keyIsValid = false;
 			return;
 		}
