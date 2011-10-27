@@ -7,9 +7,9 @@ LRCDesktop::LRCDesktop(QWidget *parent) :
     settings.beginGroup("LRCProperty");
     this->restoreGeometry(settings.value("geometry").toByteArray());
     settings.endGroup();
-    font = new QFont("ºÚÌå", 20);
+    font = new QFont("é»‘ä½“", 20);
     QFontMetrics metrics(*font);
-    QString list=tr("¶¹°êµçÌ¨ By Spring");
+    QString list=tr("è±†ç“£ç”µå° By Spring");
     r = metrics.boundingRect(list);
     this->resize(r.size());
 //    left = QRect(0,0,(int)left.width(),r.height());

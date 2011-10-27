@@ -266,7 +266,7 @@ Rectangle {
         height: 20
         text: album
         smooth: true
-        font.family: "Î¢ÈíÑÅºÚ"
+        font.family: "å¾®è½¯é›…é»‘"
         font.pixelSize: 12
     }
 
@@ -280,7 +280,7 @@ Rectangle {
         horizontalAlignment: Text.AlignLeft
         wrapMode: Text.NoWrap
         smooth: true
-        font.family: "Î¢ÈíÑÅºÚ"
+        font.family: "å¾®è½¯é›…é»‘"
         font.pixelSize: 27
     }
 
@@ -293,7 +293,7 @@ Rectangle {
         color: "#049b68"
         text: title
         smooth: true
-        font.family: "Î¢ÈíÑÅºÚ"
+        font.family: "å¾®è½¯é›…é»‘"
         font.pixelSize: 12
     }
 
@@ -309,7 +309,7 @@ Rectangle {
         horizontalAlignment: Text.AlignHCenter
 
         font.pointSize: 10
-        font.family: "Î¢ÈíÑÅºÚ"
+        font.family: "å¾®è½¯é›…é»‘"
 
         opacity: 0
     }
@@ -351,7 +351,7 @@ Rectangle {
             x: 28
             y: 23
             text: "\u6362\u53F0"
-            font.family: "Î¢ÈíÑÅºÚ"
+            font.family: "å¾®è½¯é›…é»‘"
             anchors.centerIn: parent
             font.pixelSize: 15
         }
@@ -398,7 +398,7 @@ Rectangle {
         Text {
             id: tperson
             text: "\u79C1\u4EBA\u5146\u8D6B"
-            font.family: "Î¢ÈíÑÅºÚ"
+            font.family: "å¾®è½¯é›…é»‘"
             verticalAlignment: Text.AlignVCenter
             horizontalAlignment: Text.AlignHCenter
             anchors.centerIn: parent
@@ -431,7 +431,7 @@ Rectangle {
         Text {
             id: tpublic
             text: "\u516C\u5171\u5146\u8D6B"
-            font.family: "Î¢ÈíÑÅºÚ"
+            font.family: "å¾®è½¯é›…é»‘"
             horizontalAlignment: Text.AlignHCenter
             verticalAlignment: Text.AlignVCenter
             anchors.centerIn: parent
@@ -463,7 +463,7 @@ Rectangle {
         Text {
             id: tdj
             text: "DJ\u5146\u8D6B"
-            font.family: "Î¢ÈíÑÅºÚ"
+            font.family: "å¾®è½¯é›…é»‘"
             verticalAlignment: Text.AlignVCenter
             horizontalAlignment: Text.AlignHCenter
             anchors.centerIn: parent
@@ -506,7 +506,7 @@ Rectangle {
             id: tdianbo
             text: "\u70B9\u64AD"
             font.pixelSize: 16
-            font.family: "Î¢ÈíÑÅºÚ"
+            font.family: "å¾®è½¯é›…é»‘"
             anchors.centerIn: parent
             horizontalAlignment: TextInput.AlignHCenter
             onAccepted: listModel.clear(),listModel2.clear(),widget.search(text)
@@ -528,7 +528,7 @@ Rectangle {
             text: "\u8FD4\u56DE"
             anchors.centerIn: parent
             font.pixelSize: 16
-            font.family: "Î¢ÈíÑÅºÚ"
+            font.family: "å¾®è½¯é›…é»‘"
         }
         MouseArea{
             id:mback
@@ -549,12 +549,12 @@ Rectangle {
     ListView{
         id: listview1
         x: 0
-        y: 0  //ÊÓÍ¼
+        y: 0  //è§†å›¾
         width:100; height:180
         opacity: 0
-        model:listModel  //¹ØÁªÊı¾İÄ£ĞÍ
-        delegate:delegate  //¹ØÁª´úÀí
-        //highlight:highlight  //¹ØÁª¸ßÁÁÌõ
+        model:listModel  //å…³è”æ•°æ®æ¨¡å‹
+        delegate:delegate  //å…³è”ä»£ç†
+        //highlight:highlight  //å…³è”é«˜äº®æ¡
         //highlightFollowsCurrentItem: false
         //currentIndex: 2
         //keyNavigationWraps: true
@@ -562,17 +562,17 @@ Rectangle {
         //Component.onCompleted: positionViewAtIndex(count-1, ListView.Beginning)
         //Keys.onPressed :console.log(currentItem.data +" is selected!")
         //Keys.onEnterPressed:console.log(currentItem.data +" is onEnterPressed!")
-        focus:true  //¿ÉÒÔ»ñµÃ½¹µã£¬ÕâÑù¾Í¿ÉÒÔÏìÓ¦¼üÅÌÁË
+        focus:true  //å¯ä»¥è·å¾—ç„¦ç‚¹ï¼Œè¿™æ ·å°±å¯ä»¥å“åº”é”®ç›˜äº†
         //highlightRangeMode: ListView.StrictlyEnforceRange
         preferredHighlightBegin: 70; preferredHighlightEnd: 70
         //onCurrentIndexChanged: root.current = currentIndex
     }
 
-    ListModel{  //Êı¾İÄ£ĞÍ
+    ListModel{  //æ•°æ®æ¨¡å‹
         id:listModel
     }
 
-    Component{     //´úÀí
+    Component{     //ä»£ç†
         id:delegate
         Item{
             id:wrapper; width:100; height:30
@@ -587,7 +587,7 @@ Rectangle {
                     verticalAlignment: Text.AlignVCenter
                     horizontalAlignment: Text.AlignHCenter
                     text:name//+"<b>MHz</b>"
-                    font.family: "Î¢ÈíÑÅºÚ"
+                    font.family: "å¾®è½¯é›…é»‘"
                 }
                 //color: ma.enabled ? Qt.darker("#9dd6c5", 1.2) : "#9dd6c5"
                 Behavior on color { ColorAnimation{ duration: 150} }
@@ -609,7 +609,7 @@ Rectangle {
         }
     }
 
-    Component{   //¸ßÁÁÌõ
+    Component{   //é«˜äº®æ¡
         id:highlight
         Rectangle{
             color:"#9dd6c5";
@@ -635,17 +635,17 @@ Rectangle {
         width: 100
         height: 180
         opacity: 0
-        model:listModel2  //¹ØÁªÊı¾İÄ£ĞÍ
-        delegate:delegate2  //¹ØÁª´úÀí
-        focus:true  //¿ÉÒÔ»ñµÃ½¹µã£¬ÕâÑù¾Í¿ÉÒÔÏìÓ¦¼üÅÌÁË
+        model:listModel2  //å…³è”æ•°æ®æ¨¡å‹
+        delegate:delegate2  //å…³è”ä»£ç†
+        focus:true  //å¯ä»¥è·å¾—ç„¦ç‚¹ï¼Œè¿™æ ·å°±å¯ä»¥å“åº”é”®ç›˜äº†
         preferredHighlightBegin: 70; preferredHighlightEnd: 70
     }
 
-    ListModel{  //Êı¾İÄ£ĞÍ
+    ListModel{  //æ•°æ®æ¨¡å‹
         id:listModel2
     }
 
-    Component{     //´úÀí
+    Component{     //ä»£ç†
         id:delegate2
         Item{
             id:wrapper; width:100; height:30
@@ -660,7 +660,7 @@ Rectangle {
                     verticalAlignment: Text.AlignVCenter
                     horizontalAlignment: Text.AlignHCenter
                     text:name//+"<b>MHz</b>"
-                    font.family: "Î¢ÈíÑÅºÚ"
+                    font.family: "å¾®è½¯é›…é»‘"
                 }
                 //color: ma.enabled ? Qt.darker("#9dd6c5", 1.2) : "#9dd6c5"
                 Behavior on color { ColorAnimation{ duration: 150} }
