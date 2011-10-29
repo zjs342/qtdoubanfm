@@ -26,20 +26,20 @@
 class DeclarativeWidget : public QDeclarativeItem
 {
 	Q_OBJECT
-	Q_PROPERTY(bool widgetEnabled READ widgetEnabled WRITE setWidgetEnabled NOTIFY widgetEnabledChanged)
+		Q_PROPERTY(bool widgetEnabled READ widgetEnabled WRITE setWidgetEnabled NOTIFY widgetEnabledChanged)
 
-public:
-	~DeclarativeWidget();
-	bool widgetEnabled() const;
-	void setWidgetEnabled(bool enabled);
+	public:
+		~DeclarativeWidget();
+		bool widgetEnabled() const;
+		void setWidgetEnabled(bool enabled);
 
 signals:
-	void widgetEnabledChanged(bool on);
+		void widgetEnabledChanged(bool on);
 
-protected:
-	explicit DeclarativeWidget(QStyleOption *option, QDeclarativeItem *parent = 0);
+	protected:
+		explicit DeclarativeWidget(QStyleOption *option, QDeclarativeItem *parent = 0);
 
-	QStyleOption *m_styleOption;
+		QStyleOption *m_styleOption;
 };
 
 #define STYLE_OPTION(X)		X *option = qstyleoption_cast<X*>(m_styleOption)

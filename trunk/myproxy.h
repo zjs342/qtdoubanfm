@@ -7,23 +7,23 @@
 #include <QDebug>
 
 namespace Ui {
-    class MyProxy;
+	class MyProxy;
 }
 
 class MyProxy : public QWidget
 {
-    Q_OBJECT
+	Q_OBJECT
 
-public:
-    explicit MyProxy(QWidget *parent = 0);
-    ~MyProxy();
+	public:
+		explicit MyProxy(QWidget *parent = 0);
+		~MyProxy();
 
-private:
-    Ui::MyProxy *ui;
-    QNetworkProxy proxy;
+	private:
+		Ui::MyProxy *ui;
+		QNetworkProxy proxy;
 
-public slots:
-    void init();
+		public slots:
+			void init();
 };
 
 #endif // MYPROXY_H
