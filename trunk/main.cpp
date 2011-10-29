@@ -22,7 +22,7 @@ int main(int argc, char *argv[])
 	w->rootContext()->setContextProperty("widget",w);
 	w->setSource(QUrl("qrc:ui.qml"));
 	w->setWindowOpacity(0.9);
-	w->setWindowTitle("è±†ç“£ç”µå°");
+	w->setWindowTitle("¶¹°êµçÌ¨");
 	w->setWindowFlags(Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint | Qt::Tool );
 	w->show();
 	QObject *rootObject = dynamic_cast<QObject*>(w->rootObject());

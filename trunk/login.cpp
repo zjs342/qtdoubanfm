@@ -121,7 +121,7 @@ void Login::extraNetworkFinished(QNetworkReply* reply)
 	QTextCodec *codec = QTextCodec::codecForName("utf8");
 	QString all = codec->toUnicode(reply->readAll());
 	//    ui->textBrowser->setText(all);
-	// Ëé∑ÂèñCookie
+	// ªÒ»°Cookie
 
 
 	QVariant list = reply->header(QNetworkRequest::SetCookieHeader);
@@ -130,9 +130,9 @@ void Login::extraNetworkFinished(QNetworkReply* reply)
 
 	//        qDebug()<<all;
 	if (all=="Your browser should have redirected you to http://www.douban.com")
-		emit succ("ÁôªÂΩïÊàêÂäü");
+		emit succ("µ«¬º≥…π¶");
 	else
-		emit succ("ÁôªÂΩïÂ§±Ë¥•");
+		emit succ("µ«¬º ß∞‹");
 }
 
 void Login::setCookie(QList<QNetworkCookie>& list)
@@ -164,7 +164,7 @@ void Login::setCookie(QList<QNetworkCookie>& list)
 
 
 	m_manager->cookieJar()->setCookiesFromUrl(m_cookies, QUrl("http://douban.fm"));
-	//     qDebug()<<"Â∑≤ÁôªÂΩï";
+	//     qDebug()<<"“—µ«¬º";
 
 	//        QNetworkRequest test;
 	//        test.setUrl(QUrl("http://douban.fm"));
@@ -202,9 +202,9 @@ void Login::testfinished(QNetworkReply *reply)
 	QUrl url;
 	url.setUrl(lrc);
 	//  qDebug()<<lrc;
-	Mamanager = new QNetworkAccessManager(this);  //Êñ∞Âª∫QNetworkAccessManagerÂØπË±°
+	Mamanager = new QNetworkAccessManager(this);  //–¬Ω®QNetworkAccessManager∂‘œÛ
 	connect(Mamanager, SIGNAL(finished(QNetworkReply*)), this, SLOT(downloadMa(QNetworkReply*)));
-	Mamanager->get(QNetworkRequest(QUrl(url))); //ÂèëÈÄÅËØ∑Ê±Ç
+	Mamanager->get(QNetworkRequest(QUrl(url))); //∑¢ÀÕ«Î«Û
 
 }
 

@@ -8,7 +8,7 @@ void Dbfm::init(QString json)
 {
 	QScriptValue sc;
 	QScriptEngine engine;
-	sc = engine.evaluate("value = " + json);//æ³¨æ„è¿™é‡Œå¿…é¡»è¿™ä¹ˆç”¨ã€‚ä¸çŸ¥é“ä¸ºä»€ä¹ˆã€‚æ²¡æœ‰å»ç ”ç©¶ã€‚
+	sc = engine.evaluate("value = " + json);//×¢ÒâÕâÀï±ØĞëÕâÃ´ÓÃ¡£²»ÖªµÀÎªÊ²Ã´¡£Ã»ÓĞÈ¥ÑĞ¾¿¡£
 	int i=0;
 
 	if (sc.property("song").isArray())
