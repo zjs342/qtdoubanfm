@@ -1,5 +1,5 @@
 /***************************************************************************
- *   Copyright (C) 2011 by VÃ­ctor FernÃ¡ndez MartÃ­nez                       *
+ *   Copyright (C) 2011 by V¨ªctor Fern¨¢ndez Mart¨ªnez                       *
  *   deejayworld@gmail.com                                                 *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *

@@ -11,13 +11,13 @@ LRCshow::LRCshow(LRCwidget *parent) :
 	this->setReadOnly(true);
 	QPalette p;
 	QColor back(204, 204, 204);
-	p.setColor(QPalette::Base, back);    //èƒŒæ™¯è‰², é»˜è®¤æ˜¯ç™½è‰²çš„
+	p.setColor(QPalette::Base, back);    //±³¾°É«, Ä¬ÈÏÊÇ°×É«µÄ
 	this->setPalette(p);
-	p.setColor(QPalette::Text, QColor(77, 100, 102));// æ–‡å­—çš„å‰æ™¯è‰²
+	p.setColor(QPalette::Text, QColor(77, 100, 102));// ÎÄ×ÖµÄÇ°¾°É«
 	this->setPalette(p);
-	p.setColor(QPalette::Highlight, back);// è¢«é€‰ä¸­åæ–‡å­—çš„èƒŒæ™¯è‰²
+	p.setColor(QPalette::Highlight, back);// ±»Ñ¡ÖĞºóÎÄ×ÖµÄ±³¾°É«
 	this->setPalette(p);
-	p.setColor(QPalette::HighlightedText, Qt::white);// è¢«é€‰ä¸­åæ–‡å­—çš„å‰æ™¯è‰²
+	p.setColor(QPalette::HighlightedText, Qt::white);// ±»Ñ¡ÖĞºóÎÄ×ÖµÄÇ°¾°É«
 	this->setPalette(p);
 }
 
@@ -112,7 +112,7 @@ void LRCshow::textshow()
 	this->moveCursor(QTextCursor::Start, QTextCursor::MoveAnchor);
 }
 
-void LRCshow::lrcresearch(QNetworkReply *reply)  //å½“å›å¤ç»“æŸå
+void LRCshow::lrcresearch(QNetworkReply *reply)  //µ±»Ø¸´½áÊøºó
 {
 	//    QString all = codec->toUnicode(reply->readAll());
 	QTextCodec *codec = QTextCodec::codecForName("utf-8");
@@ -133,7 +133,7 @@ void LRCshow::lrcresearch(QNetworkReply *reply)  //å½“å›å¤ç»“æŸå
 	manager = new QNetworkAccessManager(this);
 	connect(manager, SIGNAL(finished(QNetworkReply*)), this, SLOT(downloadlrc(QNetworkReply*)));
 	manager->get(QNetworkRequest(QUrl(lrc)));
-	reply->deleteLater();   //æœ€åè¦é‡Šæ”¾replyå¯¹è±¡
+	reply->deleteLater();   //×îºóÒªÊÍ·Åreply¶ÔÏó
 }
 
 void LRCshow::downloadlrc(QNetworkReply *reply)

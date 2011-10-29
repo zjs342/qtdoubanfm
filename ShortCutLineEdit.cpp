@@ -16,7 +16,7 @@ ShortCutLineEdit::ShortCutLineEdit( QWidget* parent ) :
 	//                m_btn.hide();
 	//                m_btn.setCursor( Qt::ArrowCursor );
 	//                connect( &m_btn, SIGNAL( clicked() ), this, SLOT( clearText() ) );
-	//                setButtonVisible(true,tr("æ¸…é™¤å¿«æ·é”®"));
+	//                setButtonVisible(true,tr("Çå³ı¿ì½İ¼ü"));
 
 	ensurePolished();
 	//                updateButtonPosition();
@@ -62,7 +62,7 @@ void ShortCutLineEdit::keyPressEvent( QKeyEvent* e )
 		s_storedKey = text();
 	}
 
-	// åé€€é”®æ¸…é™¤å¿«æ·é”®
+	// ºóÍË¼üÇå³ı¿ì½İ¼ü
 	if( e->key() == Qt::Key_Backspace )
 	{
 		setText( "" );
@@ -79,7 +79,7 @@ void ShortCutLineEdit::keyPressEvent( QKeyEvent* e )
 	setText( keyseq );
 	if( modifiers == 0 || key == 0 )
 	{
-		// å¦‚æœæ²¡æœ‰modifierï¼Œæˆ–è€…åªæœ‰modifierï¼Œè¿™ä¸ªå¿«æ·é”®ä¸èƒ½ç”¨ã€‚
+		// Èç¹ûÃ»ÓĞmodifier£¬»òÕßÖ»ÓĞmodifier£¬Õâ¸ö¿ì½İ¼ü²»ÄÜÓÃ¡£
 		b_keyIsValid = false;
 		return;
 	}
