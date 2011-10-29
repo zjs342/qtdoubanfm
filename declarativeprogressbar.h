@@ -25,30 +25,30 @@
 
 class DeclarativeProgressBar : public DeclarativeWidget
 {
-    Q_OBJECT
-	Q_PROPERTY(int minimum READ minimum WRITE setMinimum NOTIFY minimumChanged)
-	Q_PROPERTY(int maximum READ maximum WRITE setMaximum NOTIFY maximumChanged)
-	Q_PROPERTY(bool textVisible READ textVisible WRITE setTextVisible NOTIFY textVisibleChanged)
-	Q_PROPERTY(int value READ value WRITE setValue NOTIFY valueChanged)
+	Q_OBJECT
+		Q_PROPERTY(int minimum READ minimum WRITE setMinimum NOTIFY minimumChanged)
+		Q_PROPERTY(int maximum READ maximum WRITE setMaximum NOTIFY maximumChanged)
+		Q_PROPERTY(bool textVisible READ textVisible WRITE setTextVisible NOTIFY textVisibleChanged)
+		Q_PROPERTY(int value READ value WRITE setValue NOTIFY valueChanged)
 
-public:
-	explicit DeclarativeProgressBar(QDeclarativeItem *parent = 0);
-	int minimum() const;
-	void setMinimum(int minimum);
-	int maximum() const;
-	void setMaximum(int maximum);
-	bool textVisible() const;
-	void setTextVisible(bool visible);
-	int value() const;
-	void setValue(int value);
+	public:
+		explicit DeclarativeProgressBar(QDeclarativeItem *parent = 0);
+		int minimum() const;
+		void setMinimum(int minimum);
+		int maximum() const;
+		void setMaximum(int maximum);
+		bool textVisible() const;
+		void setTextVisible(bool visible);
+		int value() const;
+		void setValue(int value);
 
-	void paint(QPainter *painter, const QStyleOptionGraphicsItem *itemOption, QWidget *widget = 0);
+		void paint(QPainter *painter, const QStyleOptionGraphicsItem *itemOption, QWidget *widget = 0);
 
 signals:
-	void minimumChanged(int minimum);
-	void maximumChanged(int maximum);
-	void textVisibleChanged(bool visible);
-	void valueChanged(int value);
+		void minimumChanged(int minimum);
+		void maximumChanged(int maximum);
+		void textVisibleChanged(bool visible);
+		void valueChanged(int value);
 };
 
 #endif // DECLARATIVEPROGRESSBAR_H

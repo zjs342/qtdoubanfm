@@ -10,13 +10,13 @@
 
 class Dbfm
 {
-public:
-    Dbfm();
-    void init(QString);
-    void channels(QString);
-    Song song[225];
-    int num;
-    void add(song);
+	public:
+		Dbfm();
+		void init(QString);
+		void channels(QString);
+		Song song[225];
+		int num;
+		void add(song);
 };
 
 #endif // DBFM_H

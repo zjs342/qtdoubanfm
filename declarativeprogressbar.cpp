@@ -20,8 +20,8 @@
 #include <QtGui>
 #include "declarativeprogressbar.h"
 
-DeclarativeProgressBar::DeclarativeProgressBar(QDeclarativeItem *parent)
-	: DeclarativeWidget(new QStyleOptionProgressBarV2, parent)
+DeclarativeProgressBar::DeclarativeProgressBar(QDeclarativeItem *parent) :
+	DeclarativeWidget(new QStyleOptionProgressBarV2, parent)
 {
 	STYLE_OPTION(QStyleOptionProgressBarV2);
 	option->minimum = 0;
@@ -29,7 +29,7 @@ DeclarativeProgressBar::DeclarativeProgressBar(QDeclarativeItem *parent)
 	option->progress = 0;
 	option->state = QStyle::State_Enabled;
 	option->text = "0%";
-        option->textVisible = false;
+	option->textVisible = false;
 }
 
 

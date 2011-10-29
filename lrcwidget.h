@@ -6,14 +6,14 @@
 
 class LRCwidget : public QWidget
 {
-    Q_OBJECT
-public:
-    explicit LRCwidget(QWidget *parent = 0);
-private:
-    QPoint dragPosition;
-protected:
-    void mouseMoveEvent(QMouseEvent *);
-    void mousePressEvent(QMouseEvent *);
+	Q_OBJECT
+	public:
+		explicit LRCwidget(QWidget *parent = 0);
+	private:
+		QPoint dragPosition;
+	protected:
+		void mouseMoveEvent(QMouseEvent *);
+		void mousePressEvent(QMouseEvent *);
 
 };
 
