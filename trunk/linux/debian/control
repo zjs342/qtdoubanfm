@@ -1,0 +1,17 @@
+Source: qtdoubanfm
+Section: Sound
+Priority: optional
+Maintainer: Spring <wangjun.313@gmail.com>
+Build-Depends: libqt4-dev (>= 4.7.3)
+Standards-Version: 3.23
+Homepage: http://code.google.com/p/qtdoubanfm/
+
+Package: qtdoubanfm
+Architecture: any
+Depends: libqt4 (>= 4.7.3)
+Conflicts:
+Replaces:
+Provides:
+Description: qtdoubanfm is a linux Client for douban.fm.
+ it's written in qt and is still in development.
+ bugs and advices please submit at http://code.google.com/p/qtdoubanfm/issues/list
