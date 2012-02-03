@@ -35,25 +35,26 @@
 class Channel
 {
 	public:
-		int id;
+        int id;
 		QString name;
 };
 
 class Channeldj
 {
 	public:
-		int id;
+        int id;
 		QString name;
 		int update;
 		int num;
 		Channel channel[50];
+        QString iid;
 };
 
 class Channelpublic
 {
 	public:
 		QString name;
-		int id;
+        int id;
 		int num;
 		Channel channel[50];
 };
@@ -78,7 +79,7 @@ class Widget : public QDeclarativeView
 		Q_PROPERTY(int pb READ pb WRITE setpb NOTIFY pbChanged)
 		Q_PROPERTY(int mystate READ mystate WRITE setmystate NOTIFY mystateChanged)
 		Q_PROPERTY(QString cName READ cName WRITE setcName NOTIFY cNameChanged)
-		Q_PROPERTY(int cNum READ cNum WRITE setcNum NOTIFY cNumChanged)
+        Q_PROPERTY(int cNum READ cNum WRITE setcNum NOTIFY cNumChanged)
 		Q_PROPERTY(bool fdesktop READ fdesktop WRITE setfdesktop NOTIFY fdesktopChanged)
 		Q_PROPERTY(QString cType READ cType WRITE setcType NOTIFY cTypeChanged)
 	public:
@@ -108,8 +109,8 @@ class Widget : public QDeclarativeView
 		void setcName(const QString a){if (a!=m_cName) {m_cName=a;emit cNameChanged();}}
 		QString cType() const {return m_cType;}
 		void setcType(const QString a){if (a!=m_cType) {m_cType=a;emit cTypeChanged();}}
-		int cNum() const {return m_cNum;}
-		void setcNum(const int a){if (a!=m_cNum) {m_cNum=a;emit cNumChanged();}}
+        int cNum() const {return m_cNum;}
+        void setcNum(const int a){if (a!=m_cNum) {m_cNum=a;emit cNumChanged();}}
 signals:
 		void titleChanged();
 		void albumChanged();
@@ -138,7 +139,7 @@ signals:
 		QString m_pic;
 		int m_pb;
 		QString m_cName;
-		int m_cNum;
+        int m_cNum;
 		QString m_cType;
 		int listNum;
 		qint64 tttime;
@@ -156,7 +157,7 @@ signals:
 		QPoint dragPosition;
 		int MM;
 		bool m_like;
-		int e_channel;
+        QString e_channel;
 		QUrl fmurl;
 		Song nowPlaySong;
 		Song nowPlayList[5];
@@ -233,7 +234,8 @@ signals:
 		void updateData(QString,int);
 		void updateData2(QString,int,int);
 		void changeChannel(QString,int);
-		void Mdesktop(bool);
+        void changeChannel2(QString);
+        void Mdesktop(bool);
 };
 
 #endif // WIDGET_H
