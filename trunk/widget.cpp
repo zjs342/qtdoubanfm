@@ -24,7 +24,7 @@ const int minX = 20,minY = 180,maxX = 420,maxY=180;
 	createTrayIcon();
 	showMessage("欢迎使用");
 	phononInit();
-	totlenum=0;dbfmNum=0;e_channel=0;listNum=0;
+    totlenum=0;dbfmNum=0;e_channel='0';listNum=0;
 	type='e';
 	connect(this->shortcutwidget->m_next,SIGNAL(activated()),this,SLOT(nextFile()));
 	connect(this->shortcutwidget->m_like,SIGNAL(activated()),this,SLOT(likeItit()));
@@ -120,24 +120,24 @@ void Widget::trayIconmenu()
 
 void Widget::iconActivated(QSystemTrayIcon::ActivationReason reason)
 {
-	//触发后台图标执行相应事件
+    //触发后台图标执行相应事件z
 	switch (reason)
-	{
-		case QSystemTrayIcon::Trigger:
-			//        if (this->isMinimized())
+    {
+        case QSystemTrayIcon::Trigger:
+            //        if (this->isMinimized())
 			//      {
 			//        this->showNormal();
 			//      break;
-			//}
+            //}
 			if (this->isHidden())
 				this->show();
 			else
-				this->hide();
+                this->hide();
 			break;
 		case QSystemTrayIcon::DoubleClick:
-			//        showMessage("鼠标双击！");
-			break;
-		case QSystemTrayIcon::MiddleClick:
+            //        showMessage("鼠标双击！");
+            break;
+        case QSystemTrayIcon::MiddleClick:
 			//        showMessage("鼠标中键！");
 			break;
 		default:
@@ -402,8 +402,8 @@ void Widget::reportPlayed()
 		h.remove(h.length()-1,1);
 		baseString.append(h);
 	}
-	if (m_cType=="public"  || m_cType=="db") baseString.append(QString("&channel=%1").arg((int)e_channel));
-	if (m_cType=="dj") baseString.append(QString("&channel=dj&pid=%1").arg((int)e_channel));
+    if (m_cType=="public"  || m_cType=="db") baseString.append(QString("&channel=%1").arg(e_channel));
+    if (m_cType=="dj") baseString.append(QString("&channel=dj&pid=%1").arg(e_channel));
 	baseString.append(QString("&r=%1").arg(r));
 	request.setUrl(baseString);
 
@@ -431,7 +431,7 @@ void Widget::requireList(char type)
 	//        url.append(QString("&last_channel=%1").arg((int)e_lastChannel));
 
 	//qDebug()<<m_cType;
-	if (m_cType=="public"  || m_cType=="db") url.append(QString("&channel=%1").arg((int)e_channel));
+    if (m_cType=="public"  || m_cType=="db") url.append(QString("&channel=%1").arg(e_channel));
 	if (m_cType=="dj")
 	{
 		if(m_historyIds.length())
@@ -448,7 +448,7 @@ void Widget::requireList(char type)
 			h.remove(h.length()-1,1);
 			url.append(h);
 		}
-		url.append(QString("&channel=dj&pid=%1").arg((int)e_channel));
+        url.append(QString("&channel=dj&pid=%1").arg(e_channel));
 	}
 	url.append(QString("&r=%1").arg(r));
 	//  qDebug()<<url;
@@ -527,8 +527,8 @@ void Widget::tick(qint64 time)
 {
 	QTime displayTime(0, (time / 60000) % 60, (time / 1000) % 60);
 	setttime(displayTime.toString("mm:ss")+"/"+m_ttick);
-	if (tttime!=0)
-		setpb((int)time*1000/tttime);
+    if (tttime!=0)
+        setpb((int)time*1000/tttime);
 	else
 		tttime=mediaObject->totalTime();
 	// qDebug()<<(int)time*100/tttime;
@@ -653,8 +653,8 @@ void Widget::showMessage(const QString &s)
 void Widget::messageAbout()
 {
 	QMessageBox::about(this,("豆瓣电台"),("<h2>By Spring</h2>"
-				"<p>2011年10月26日"
-				"<p>Spring的豆瓣电台3.23 beta"
+                "<p>2011年2月3日"
+                "<p>Spring的豆瓣电台3.24 beta"
 				"<p>125392171@163.com"));
 }
 
@@ -712,7 +712,7 @@ void Widget::channelInit()
 
 void Widget::downloadChannel(QNetworkReply *reply)  //当回复结束后
 {
-	//qDebug()<<"downloadList";
+    //qDebug()<<"downloadList";
 	QTextCodec *codec = QTextCodec::codecForName("utf8");
 	QString all= codec->toUnicode(reply->readAll());
 
@@ -757,51 +757,53 @@ void Widget::downloadChannel(QNetworkReply *reply)  //当回复结束后
 	channelCate=k-1;
 	channelNum = i-1;
 
-	head = "channelInfo.dj = ";
-	tail = "subChannelInfo";
+    head = "channelInfo.dj = ";
+    tail = "!function()";
 	h = all.indexOf(head);
 	t = all.indexOf(tail);
 	if (h!=-1)
 	{
 	}
 	//json = "[" + all.mid(h+18,t-h-22) + "]";
-	json=all.mid(h+17,t-h-20);
-	//qDebug()<<json;
+    json=all.mid(h+17,t-h-20);
+    //qDebug()<<json;
 	sc = engine.evaluate("value = " + json);//注意这里必须这么用。不知道为什么。没有去研究。
 	i=0;
 	QScriptValueIterator cit(sc);
 	while (cit.hasNext())
 	{
 		cit.next();
-		channeldj[i].name=cit.value().property("name").toString();
-		channeldj[i].id=cit.value().property("channel_id").toInteger();
-		channeldj[i].update=cit.value().property("update").toInteger();
-		//qDebug()<<channeldj[i].name<<channeldj[i].id<<i;
+        channeldj[i].name=cit.value().property("name").toString();
+        channeldj[i].id=cit.value().property("channel_id").toInteger();
+        if (channeldj[i].id==0)
+            channeldj[i].iid=cit.value().property("channel_id").toString();
+        channeldj[i].update=cit.value().property("update").toInteger();
+        //qDebug()<<channeldj[i].name<<channeldj[i].id<<i<<channeldj[i].iid;
 		if (channeldj[i].name!="") i++;
 	}
 
 	channeldjNum=i;
 	head = "subChannelInfo = ";
-	tail = "!function";
+    tail = "channelInfo.dj";
 	h = all.indexOf(head);
 	t = all.indexOf(tail);
 	if (h!=-1)
 	{
 	}
 	//json = "[" + all.mid(h+18,t-h-22) + "]";
-	json=all.mid(h+17,t-h-20);
-	//qDebug()<<json;
+    json=all.mid(h+17,t-h-19);
+    //qDebug()<<json;
 	sc = engine.evaluate("value = " + json);//注意这里必须这么用。不知道为什么。没有去研究。
 	for (int j=0;j<i;j++)
 	{
 		QScriptValueIterator ccit(sc.property(channeldj[j].id));
-		//qDebug()<<channeldj[j].id<<j;
+        //qDebug()<<channeldj[j].id<<j;
 		k=0;
 		while (ccit.hasNext())
 		{
 			ccit.next();
 			channeldj[j].channel[k].name=ccit.value().property("name").toString();
-			channeldj[j].channel[k].id=ccit.value().property("channel_id").toInteger();
+            channeldj[j].channel[k].id=ccit.value().property("channel_id").toInteger();
 			//qDebug()<<channeldj[j].channel[k].name<<j;
 			if (channeldj[j].channel[k].name!="") k++;
 			//qDebug()<<cit.value().property("name").toString();
@@ -814,7 +816,7 @@ void Widget::downloadChannel(QNetworkReply *reply)  //当回复结束后
 
 void Widget::updateData(QString type,int n)
 {
-	//qDebug()<<"updateData"<<n<<channelCate;
+    //qDebug()<<"updateData"<<n<<channelCate;
 	if (type=="public"){
 		if (n==channelCate) return;
 		setcType("public");
@@ -843,21 +845,26 @@ void Widget::updateData(QString type,int n)
 
 void Widget::updateData2(QString type,int a,int n)
 {
-	//qDebug()<<"updateData2"<<a<<n;
+    //qDebug()<<"updateData2"<<a<<n;
 	if (type=="public")
 	{
 		if (n==channelpublic[a].num) return;
 		setcName(channelpublic[a].channel[n].name);
-		setcNum(channelpublic[a].channel[n].id);
+        setcNum(channelpublic[a].channel[n].id);
 		setcType("public");
 		emit data2(QVariant("public"),QVariant(a),QVariant(n));
 		return;
 	}
 	if (type=="dj")
-	{
+    {
+        if (channeldj[a].iid!="")
+        {
+            changeChannel2(channeldj[a].iid);
+            return;
+        }
 		if (n==channeldj[a].num) return;
 		setcName(channeldj[a].channel[n].name);
-		setcNum(channeldj[a].channel[n].id);
+        setcNum(channeldj[a].channel[n].id);
 		setcType("dj");
 		emit data2(QVariant("dj"),QVariant(a),QVariant(n));
 		return;
@@ -877,7 +884,7 @@ void Widget::updateData2(QString type,int a,int n)
 
 void Widget::changeChannel(QString t, int a)
 {
-	e_channel=a;
+    e_channel=QString::number(a);
 	setplaysource(":image/pause.png");
 	if (t=="public")
 	{
@@ -892,6 +899,17 @@ void Widget::changeChannel(QString t, int a)
 	type='n';
 	onSongStatus();
 	setmystate2(2);
+}
+
+void Widget::changeChannel2(QString a)
+{
+    e_channel=a;
+    setplaysource(":image/pause.png");
+    setcType("dj");
+    fmurl.setUrl(QString("http://douban.fm/j/mine/playlist?type=n&h=&channel=dj&pid=%1").arg(a));
+    type='n';
+    onSongStatus();
+    setmystate2(2);
 }
 
 void Widget::downloadSong()
