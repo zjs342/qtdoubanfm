@@ -1,7 +1,7 @@
 #ifndef LRCDesktop_H
 #define LRCDesktop_H
 
-#include <QWidget>
+#include <QLabel>
 #include <QBitmap>
 #include <QPainterPath>
 #include <QPainter>
@@ -9,7 +9,7 @@
 #include <QMouseEvent>
 #include <QSettings>
 
-class LRCDesktop : public QWidget
+class LRCDesktop : public QLabel
 {
 	Q_OBJECT
 	public:
@@ -17,17 +17,19 @@ class LRCDesktop : public QWidget
 		~LRCDesktop();
 		void showWord(QString str);
 	private:
-		QFont *font;
-		QPainterPath *path;
-		QRect r;
-		QBitmap bmp;
-		QRect left;
-		QRect right;
-		QPoint dragPosition;
-		int last;
+//		QFont *font;
+//		QPainterPath *path;
+        QRect r;
+//		QBitmap bmp;
+//		QRect left;
+//		QRect right;
+        QPoint dragPosition;
+//		int last;
+//        qreal length;
+//        qreal lrcWidth;
 
 	protected:
-		virtual void paintEvent(QPaintEvent *e);
+        virtual void paintEvent(QPaintEvent *e);
 		void mouseMoveEvent(QMouseEvent *);
 		void mousePressEvent(QMouseEvent *);
 

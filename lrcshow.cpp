@@ -36,7 +36,8 @@ void LRCshow::showWord(int time)
 		tc.setPosition(pos, QTextCursor::MoveAnchor);
 		this->setTextCursor(tc);
 		this->moveCursor(QTextCursor::EndOfLine, QTextCursor::KeepAnchor);
-		lrcdesktop->showWord(this->textCursor().selectedText());
+        lrcdesktop->setText(this->textCursor().selectedText());
+        //lrcdesktop->showWord(this->textCursor().selectedText());
 		//        qDebug()<<time<<posmap->value(time)<<map->value(time);
 	}
 }
