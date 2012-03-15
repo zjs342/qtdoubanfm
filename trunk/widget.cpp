@@ -653,8 +653,8 @@ void Widget::showMessage(const QString &s)
 void Widget::messageAbout()
 {
 	QMessageBox::about(this,("豆瓣电台"),("<h2>By Spring</h2>"
-                "<p>2011年2月3日"
-                "<p>Spring的豆瓣电台3.24 beta"
+                "<p>2011年3月15日"
+                "<p>Spring的豆瓣电台3.25 beta"
 				"<p>125392171@163.com"));
 }
 
